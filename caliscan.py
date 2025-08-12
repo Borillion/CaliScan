@@ -8,6 +8,8 @@
 # grid_min
 # grid_max
 
+import logging
+
 class CaliScan:
     def __init__(self, config):
         # Get the printer config from klipper
@@ -25,7 +27,10 @@ class CaliScan:
         self.gcode.register_command('CALI_SCAN', self._ready_handler)
 
     def _on_ready(self):
-        self.gcode.respond_info(self.message)
+        # self.gcode.respond_info(self.message) This still does not work!
+        logging.info("CaliScan: %s", self.message)
+        waketime = self.reactor.monotonic() + 1
+        self.reactor.register_timer(self._greet, waketime)
 
     def _ready_handler(self, gcmd):
         waketime = self.reactor.monotonic() + 1
