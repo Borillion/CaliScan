@@ -15,7 +15,7 @@ if [ -e "${KLIPPER_DIR}/klippy/extras/caliscan.py" ]; then
 fi
 
 # create symlink
-ln -sf "${KLIPPER_DIR}/caliscan.py" "${KLIPPER_DIR}/klippy/extras/caliscan.py"
+ln -sf "caliscan.py" "${KLIPPER_DIR}/klippy/extras/caliscan.py"
 
 # Exclude py from git backup and tracking
 if ! grep -q "klippy/extras/caliscan.py" "${KLIPPER_DIR}/.git/info/exclude"; then
