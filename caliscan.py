@@ -18,12 +18,14 @@ class CaliScan:
         # Lets start by sending a message to the console
         self.message = config.get('message', 'Loaded CaliScan Module')
 
-        # Schedule a one-time greeting right after Klipper starts
-        waketime = self.reactor.monotonic() + 1
-        self.reactor.register_timer(self._greet, waketime)
+        ## call function when klippy indicates its ready 
+        self.printer.register_event_handler("klippy:ready", self._handle_ready)
 
         # Still register the G-code in case you want it later
         self.gcode.register_command('CALI_SCAN', self._ready_handler)
+
+    def _on_ready(self):
+        self.gcode.respond_info(self.message)
 
     def _ready_handler(self, gcmd):
         waketime = self.reactor.monotonic() + 1
