@@ -19,7 +19,7 @@ class CaliScan:
         self.message = config.get('message', 'Loaded CaliScan Module')
 
         ## call function when klippy indicates its ready 
-        self.printer.register_event_handler("klippy:ready", self._handle_ready)
+        self.printer.register_event_handler("klippy:ready", self._on_ready)
 
         # Still register the G-code in case you want it later
         self.gcode.register_command('CALI_SCAN', self._ready_handler)
