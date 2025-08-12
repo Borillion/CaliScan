@@ -2,6 +2,9 @@
 
 KLIPPER_DIR="${HOME}/klipper"
 
+# Get the current dir absolute path
+CURR_DIR="$( cd -- "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd -P )"
+
 # Check if Klipper directory exists
 if [ ! -d "$KLIPPER_DIR" ]; then
     echo "caliscan: klipper directory does not exist"
@@ -14,8 +17,9 @@ if [ -e "${KLIPPER_DIR}/klippy/extras/caliscan.py" ]; then
     rm "${KLIPPER_DIR}/klippy/extras/caliscan.py"
 fi
 
-# create symlink
-ln -sf "caliscan.py" "${KLIPPER_DIR}/klippy/extras/caliscan.py"
+# Link caliscan.py from project into Klipper extras
+echo "caliscan: linking klippy to ${BKDIR}/caliscan.py"
+ln -sfn "${BKDIR}/caliscan.py" "${KLIPPER_DIR}/klippy/extras/caliscan.py"
 
 # Exclude py from git backup and tracking
 if ! grep -q "klippy/extras/caliscan.py" "${KLIPPER_DIR}/.git/info/exclude"; then
