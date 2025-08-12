@@ -18,7 +18,7 @@ fi
 
 # Link caliscan.py from project into Klipper extras
 echo "caliscan: linking klippy to ${CURR_DIR}/caliscan.py"
-ln -sfn "${BKDCURR_DIRIR}/caliscan.py" "${KLIPPER_DIR}/klippy/extras/caliscan.py"
+ln -sfn "${CURR_DIR}/caliscan.py" "${KLIPPER_DIR}/klippy/extras/caliscan.py"
 
 # Exclude py from git backup and tracking
 if ! grep -q "klippy/extras/caliscan.py" "${KLIPPER_DIR}/.git/info/exclude"; then
